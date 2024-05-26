@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feature Selection</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('static/image/1.jpeg'); /* Replace 'path_to_your_image.jpg' with the path to your image */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        h1 {
+            color: orange;
+            text-align: center;
+        }
+
+        form {
+            width: 50%;
+            margin: 0 auto;
+            background-color:#808080;
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 6px;
+            margin-bottom: 10px;
+            border: 1px solid #ADD8E6;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        button[type="submit"],
+        button[type="button"],
+        input[type="reset"] {
+            background-color: purple;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        button[type="submit"]:hover,
+        button[type="button"]:hover,
+        input[type="reset"]:hover {
+            background-color: #ff7f00;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="color:orange;">Select Features for {{ selected_age }}</h1>
+    <form action="/predict" method="post">
+        <input type="hidden" name="age_category" value="{{ selected_age }}">
+        {% if selected_age == 'Old' %}
+            <label for="old_medications">Old Medications:</label>
+            <select name="old_medications" id="old_medications">
+                <option value=""></option>
+                <option value="1">yes</option>
+                <option value="0">no</option>
+            </select>
+            <br>
+            <label for="old_water">Old Water:</label>
+            <input type="number" name="old_water" id="old_water" min="1" max="5" step="1"><br>
+            <label for="old_sleep_patterns">Old sleep patterns:</label>
+            <select name="old_sleep_patterns" id="old_sleep_patterns">
+                <option value=""></option>
+                <option value="1">yes</option>
+                <option value="0">no</option>
+            </select>
+            <br>
+             <label for="old_height">Old Height:</label>
+            <input type="number" name="old_height" id="old_height"><br>
+            <label for="old_weight">Old Weight:</label>
+            <input type="number" name="old_weight" id="old_weight"><br>
+            <label for="old_numberof_meals">Enter Old no.of meals</label>
+            <input type="number" name="old_numberof_meals" id="old_numberof_meals" min="1" max="5" step="1"><br>
+            <label for="old_family_history">Old family history:</label>
+            <select name="old_family_history" id="old_family_history">
+                <option value=""></option>
+                <option value="1">yes</option>
+                <option value="0">no</option>
+            </select>
+            <br>
+           <label for="old_alcohol">Old alcohol:</label>
+            <select name="old_alcohol" id="old_alcohol">
+                <option value=""></option>
+                <option value="1">yes</option>
+                <option value="0">no</option>
+            </select>
+            <br>
+           <label for="old_smoke">Old smoke:</label>
+            <select name="old_smoke" id="old_smoke">
+                <option value=""></option>
+                <option value="2">always</option>
+                <option value="1">sometimes</option>
+                <option value="0">never</option>
+            </select>
+            <br>
+            <label for="old_loss_of_muscle_mass">Old loss_of_muscle_mass:</label>
+            <select name="old_loss_of_muscle_mass" id="old_loss_of_muscle_mass">
+                <option value=""></option>
+                <option value="1">yes</option>
+                <option value="0">no</option>
+            </select>
+            <br>
+            <label for="old_mobility_issues">Old mobility_issues:</label>
+            <select name="old_mobility_issues" id="old_mobility_issues">
+                <option value=""></option>
+                <option value="1">yes</option>
+                <option value="0">no</option>
+            </select>
+            <br>
+            <label for="old_age">Old age(61-95):</label>
+            <input type="number" name="old_age" id="old_age" min="61" max="95" step="1"><br>
+            <label for="old_gender">Old gender:</label>
+            <select name="old_gender" id="old_gender">
+                <option value=""></option>
+                <option value="1">female</option>
+                <option value="0">male</option>
+            </select>
+            <br>
+            <label for="old_stress">Old stress:</label>
+            <select name="old_stress" id="old_stress">
+                <option value=""></option>
+                <option value="2">episodic stress</option>
+                <option value="1">acute stress</option>
+                <option value="0">chronic stress</option>
+            </select>
+            <br>
+            <label for="old_poor_diet">Old Poor Diet:</label>
+            <select name="old_poor_diet" id="old_poor_diet">
+                <option value=""></option>
+                <option value="2">frequently</option>
+                <option value="1">sometimes</option>
+                <option value="0">never</option>
+            </select>
+            <br>
+            <label for="old_heart_disease">Old heart_disease:</label>
+            <select name="old_heart_disease" id="old_heart_disease">
+                <option value=""></option>
+                <option value="1">yes</option>
+                <option value="0">no</option>
+            </select>
+            <br>
+            <label for="old_asthma">Old asthma:</label>
+            <select name="old_asthma" id="old_asthma">
+                <option value=""></option>
+                <option value="1">yes</option>
+                <option value="0">no</option>
+            </select>
+            <br>
+            <label for="old_diabetes">Old diabetes:</label>
+            <select name="old_diabetes" id="old_diabetes">
+                <option value=""></option>
+                <option value="1">yes</option>
+                <option value="0">no</option>
+            </select>
+            <br>
+            <label for="old_economic_constraints">Old economic_constraints:</label>
+            <select name="old_economic_constraints" id="old_economic_constraints">
+                <option value=""></option>
+                <option value="1">yes</option>
+                <option value="0">no</option>
+            </select>
+            <br>
+            <label for="old_isolation">Old isolation:</label>
+            <select name="old_isolation" id="old_isolation">
+                <option value=""></option>
+                <option value="1">yes</option>
+                <option value="0">no</option>
+            </select>
+            <br>
+            <label for="old_digestive_issues">Old digestive_issues:</label>
+            <select name="old_digestive_issues" id="old_digestive_issues">
+                <option value=""></option>
+                <option value="1">yes</option>
+                <option value="0">no</option>
+            </select>
+            <br>
+            <label for="old_hypertension">Old hypertension:</label>
+            <select name="old_hypertension" id="old_hypertension">
+                <option value=""></option>
+                <option value="1">yes</option>
+                <option value="0">no</option>
+            </select>
+            <br>
+            <label for="old_chronic_pain">Old chronic_pain:</label>
+            <select name="old_chronic_pain" id="old_chronic_pain">
+                <option value=""></option>
+                <option value="1">yes</option>
+                <option value="0">no</option>
+            </select>
+            <!-- Add more feature dropdowns for Old category as needed -->
+        {% elif selected_age == 'Middle' %}
+            <label for="middle_water">Middle Water:</label>
+            <input type="number" name="middle_water" id="middle_water" min="1" max="5" step="1">
+            <br>
+            <label for="middle_physical_activty">Middle physical_activty:</label>
+            <select name="middle_physical_activty" id="middle_physical_activty">
+                <option value=""></option>
+                <option value="1">yes</option>
+                <option value="0">no</option>
+            </select>
+            <br>
+            <label for="middle_height">Middle Height:</label>
+            <input type="number" name="middle_height" id="middle_height"><br>
+            <label for="middle_weight">Middle Weight:</label>
+            <input type="number" name="middle_weight" id="middle_weight"><br>
+            <label for="middle_technology">Middle technology:</label>
+            <select name="middle_technology" id="middle_technology">
+                <option value=""></option>
+                <option value="2">always</option>
+                <option value="1">sometimes</option>
+                <option value="0">never</option>
+            </select>
+            <br>
+            <label for="middle_numberof_meals">Enter Middle no.of meals</label>
+            <input type="number" name="middle_numberof_meals" id="middle_numberof_meals" min="1" max="5" step="1"><br>
+            <label for="middle_family_history">Middle family history:</label>
+            <select name="middle_family_history" id="middle_family_history">
+                <option value=""></option>
+                <option value="1">yes</option>
+                <option value="0">no</option>
+            </select>
+            <br>
+           <label for="middle_alcohol">Middle alcohol:</label>
+            <select name="middle_alcohol" id="middle_alcohol">
+                <option value=""></option>
+                <option value="1">yes</option>
+                <option value="0">no</option>
+            </select>
+            <br>
+            <label for="middle_transportation">Middle transportation:</label>
+            <select name="middle_transportation" id="middle_transportation">
+                <option value=""></option>
+                <option value="3">walking</option>
+                <option value="2">automobile</option>
+                <option value="1">motorbike</option>
+                <option value="0">public transportation</option>
+            </select>
+            <br>
+            <label for="middle_sedentary_job">Middle sedentary_job:</label>
+            <select name="middle_sedentary_job" id="middle_sedentary_job">
+                <option value=""></option>
+                <option value="1">yes</option>
+                <option value="0">no</option>
+            </select>
+            <br>
+            <label for="middle_smoke">Middle smoke:</label>
+            <select name="middle_smoke" id="middle_smoke">
+                <option value=""></option>
+                <option value="2">always</option>
+                <option value="1">sometimes</option>
+                <option value="0">never</option>
+            </select>
+            <br>
+            <label for="middle_screen_time">Middle screen_time:</label>
+            <select name="middle_screen_time" id="middle_screen_time">
+                <option value=""></option>
+                <option value="1">yes</option>
+                <option value="0">no</option>
+            </select>
+            <br>
+            <label for="middle_age">Middle age(20-60):</label>
+            <input type="number" name="middle_age" id="middle_age" min="20" max="60" step="1"><br>
+            <label for="middle_gender">Middle gender:</label>
+            <select name="middle_gender" id="middle_gender">
+                <option value=""></option>
+                <option value="1">female</option>
+                <option value="0">male</option>
+            </select>
+            <br>
+            <label for="middle_gym_regularly">Middle gym_regularly:</label>
+            <select name="middle_gym_regularly" id="middle_gym_regularly">
+                <option value=""></option>
+                <option value="1">yes</option>
+                <option value="0">no</option>
+            </select>
+            <br>
+            <label for="middle_stress">Middle stress:</label>
+            <select name="middle_stress" id="middle_stress">
+                <option value=""></option>
+                <option value="2">episodic stress</option>
+                <option value="1">acute stress</option>
+                <option value="0">chronic stress</option>
+            </select>
+            <br>
+            <label for="middle_heart_disease">Middle heart_disease:</label>
+            <select name="middle_heart_disease" id="middle_heart_disease">
+                <option value=""></option>
+                <option value="1">yes</option>
+                <option value="0">no</option>
+            </select>
+            <br>
+            <label for="middle_asthma">Middle asthma:</label>
+            <select name="middle_asthma" id="middle_asthma">
+                <option value=""></option>
+                <option value="1">yes</option>
+                <option value="0">no</option>
+            </select>
+            <br>
+            <label for="middle_poor_diet">Middle Poor Diet:</label>
+            <select name="middle_poor_diet" id="middle_poor_diet">
+                <option value=""></option>
+                <option value="2">frequently</option>
+                <option value="1">sometimes</option>
+                <option value="0">never</option>
+            </select>
+            <br>
+            <label for="middle_diabetes">Middle diabetes:</label>
+            <select name="middle_diabetes" id="middle_diabetes">
+                <option value=""></option>
+                <option value="1">yes</option>
+                <option value="0">no</option>
+            </select>
+            <br>
+            <label for="middle_hypertension">Middle hypertension:</label>
+            <select name="middle_hypertension" id="middle_hypertension">
+                <option value=""></option>
+                <option value="1">yes</option>
+                <option value="0">no</option>
+            </select>
+            <br>
+            <label for="middle_marrital_status">Middle marrital_status:</label>
+            <select name="middle_marrital_status" id="middle_marrital_status">
+                <option value=""></option>
+                <option value="1">yes</option>
+                <option value="0">no</option>
+            </select>
+            <!-- Add more feature inputs for Middle category as needed -->
+        {% elif selected_age == 'Teenage' %}
+            <label for="teen_water">Teen Water:</label>
+            <input type="number" name="teen_water" id="teen_water" min="1" max="5" step="1">
+            <br>
+            <label for="teen_height">Teen Height:</label>
+            <input type="number" name="teen_height" id="teen_height"><br>
+            <label for="teen_weight">Teen Weight:</label>
+            <input type="number" name="teen_weight" id="teen_weight"><br>
+            <label for="teen_numberof_meals">Enter Teen no.of meals</label>
+            <input type="number" name="teen_numberof_meals" id="teen_numberof_meals" min="1" max="5" step="1"><br>
+            <label for="teen_family_history">Teen family history:</label>
+            <select name="teen_family_history" id="teen_family_history">
+                <option value=""></option>
+                <option value="1">yes</option>
+                <option value="0">no</option>
+            </select>
+            <br>
+            <label for="teen_age">Teen age(13-19):</label>
+            <input type="number" name="teen_age" id="teen_age" min="13" max="19" step="1"><br>
+            <label for="teen_gender">Teen gender:</label>
+            <select name="teen_gender" id="teen_gender">
+                <option value=""></option>
+                <option value="1">female</option>
+                <option value="0">male</option>
+            </select>
+            <br>
+            <label for="teen_sleep_patterns">Teen sleep patterns:</label>
+            <select name="teen_sleep_patterns" id="teen_sleep_patterns">
+                <option value=""></option>
+                <option value="1">yes</option>
+                <option value="0">no</option>
+            </select>
+            <br>
+            <label for="teen_diabetes">Teen diabetes:</label>
+            <select name="teen_diabetes" id="teen_diabetes">
+                <option value=""></option>
+                <option value="1">yes</option>
+                <option value="0">no</option>
+            </select>
+            <br>
+            <label for="teen_financial_constraints">Teen financial_constraints:</label>
+            <select name="teen_financial_constraints" id="teen_financial_constraints">
+                <option value=""></option>
+                <option value="1">yes</option>
+                <option value="0">no</option>
+            </select>
+            <br>
+            <label for="teen_vaccination">Teen vaccination:</label>
+            <select name="teen_vaccination" id="teen_vaccination">
+                <option value=""></option>
+                <option value="1">yes</option>
+                <option value="0">no</option>
+            </select>
+            <br>
+            <label for="teen_physically_challenged">Teen physically_challenged:</label>
+            <select name="teen_physically_challenged" id="teen_physically_challenged">
+                <option value=""></option>
+                <option value="1">yes</option>
+                <option value="0">no</option>
+            </select>
+            <br>
+            <label for="teen_medications">Teen medications:</label>
+            <select name="teen_medications" id="teen_medications">
+                <option value=""></option>
+                <option value="1">yes</option>
+                <option value="0">no</option>
+            </select>
+            <br>
+            <label for="teen_early_intake_of_solid_foods">Teen early_intake_of_solid_foods:</label>
+            <select name="teen_early_intake_of_solid_foods" id="teen_early_intake_of_solid_foods">
+                <option value=""></option>
+                <option value="1">yes</option>
+                <option value="0">no</option>
+            </select>
+            <br>
+            <label for="teen_environmental_issues">Teen environmental_issues:</label>
+            <select name="teen_environmental_issues" id="teen_environmental_issues">
+                <option value=""></option>
+                <option value="1">yes</option>
+                <option value="0">no</option>
+            </select>
+            <br>
+            <label for="teen_clinical_visit">Teen clinical_visit:</label>
+            <select name="teen_clinical_visit" id="teen_clinical_visit">
+                <option value=""></option>
+                <option value="1">yes</option>
+                <option value="0">no</option>
+            </select>
+            <br>
+            <label for="teen_lack_ofnutritional_education">Teen lack_ofnutritional_education:</label>
+            <select name="teen_lack_ofnutritional_education" id="teen_lack_ofnutritional_education">
+                <option value=""></option>
+                <option value="1">yes</option>
+                <option value="0">no</option>
+            </select>
+            <br>
+            <label for="teen_poor_diet">Teen Poor Diet:</label>
+            <select name="teen_poor_diet" id="teen_poor_diet">
+                <option value=""></option>
+                <option value="2">frequently</option>
+                <option value="1">sometimes</option>
+                <option value="0">never</option>
+            </select>
+            <br>
+            <label for="teen_hypertension">Teen hypertension:</label>
+            <select name="teen_hypertension" id="teen_hypertension">
+                <option value=""></option>
+                <option value="1">yes</option>
+                <option value="0">no</option>
+            </select>
+            <br>
+            <label for="teen_asthma">Teen asthma:</label>
+            <select name="teen_asthma" id="teen_asthma">
+                <option value=""></option>
+                <option value="1">yes</option>
+                <option value="0">no</option>
+            </select>
+            <br>
+            <label for="teen_digestive_issues">Teen digestive_issues:</label>
+            <select name="teen_digestive_issues" id="teen_digestive_issues">
+                <option value=""></option>
+                <option value="1">yes</option>
+                <option value="0">no</option>
+            </select>
+            <br>
+            <label for="teen_gym_regularly">Teen gym_regularly:</label>
+            <select name="teen_gym_regularly" id="teen_gym_regularly">
+                <option value=""></option>
+                <option value="1">yes</option>
+                <option value="0">no</option>
+            </select>
+            <!-- Add more feature inputs for Teenage category as needed -->
+        {% elif selected_age == 'Children' %}
+            <label for="water">Water:</label>
+            <input type="number" name="water" id="water" min="1" max="5" step="1">
+            <br>
+            <label for="height">Height:</label>
+            <input type="number" name="height" id="height"><br>
+            <label for="weight">Weight:</label>
+            <input type="number" name="weight" id="weight"><br>
+            <label for="numberof_meals">Enter no.of meals</label>
+            <input type="number" name="numberof_meals" id="numberof_meals" min="1" max="5" step="1"><br>
+            <label for="family_history">family history:</label>
+            <select name="family_history" id="family_history">
+                <option value=""></option>
+                <option value="1">yes</option>
+                <option value="0">no</option>
+            </select>
+            <br>
+            <label for="age">age(2-12):</label>
+            <input type="number" name="age" id="age" min="2" max="12" step="1"><br>
+            <label for="gender">gender:</label>
+            <select name="gender" id="gender">
+                <option value=""></option>
+                <option value="1">female</option>
+                <option value="0">male</option>
+            </select>
+            <br>
+            <label for="sleep_patterns">sleep patterns:</label>
+            <select name="sleep_patterns" id="sleep_patterns">
+                <option value=""></option>
+                <option value="1">yes</option>
+                <option value="0">no</option>
+            </select>
+            <br>
+            <label for="diabetes">diabetes:</label>
+            <select name="diabetes" id="diabetes">
+                <option value=""></option>
+                <option value="1">yes</option>
+                <option value="0">no</option>
+            </select>
+            <br>
+            <label for="financial_constraints">financial_constraints:</label>
+            <select name="financial_constraints" id="financial_constraints">
+                <option value=""></option>
+                <option value="1">yes</option>
+                <option value="0">no</option>
+            </select>
+            <br>
+            <label for="vaccination">vaccination:</label>
+            <select name="vaccination" id="vaccination">
+                <option value=""></option>
+                <option value="1">yes</option>
+                <option value="0">no</option>
+            </select>
+            <br>
+            <label for="physically_challenged">physically_challenged:</label>
+            <select name="physically_challenged" id="physically_challenged">
+                <option value=""></option>
+                <option value="1">yes</option>
+                <option value="0">no</option>
+            </select>
+            <br>
+            <label for="medications">medications:</label>
+            <select name="medications" id="medications">
+                <option value=""></option>
+                <option value="1">yes</option>
+                <option value="0">no</option>
+            </select>
+            <br>
+            <label for="early_intake_of_solid_foods">early_intake_of_solid_foods:</label>
+            <select name="early_intake_of_solid_foods" id="early_intake_of_solid_foods">
+                <option value=""></option>
+                <option value="1">yes</option>
+                <option value="0">no</option>
+            </select>
+            <br>
+            <label for="environmental_issues">environmental_issues:</label>
+            <select name="environmental_issues" id="environmental_issues">
+                <option value=""></option>
+                <option value="1">yes</option>
+                <option value="0">no</option>
+            </select>
+            <br>
+            <label for="clinical_visit">clinical_visit:</label>
+            <select name="clinical_visit" id="clinical_visit">
+                <option value=""></option>
+                <option value="1">yes</option>
+                <option value="0">no</option>
+            </select>
+            <br>
+            <label for="lack_ofnutritional_education">lack_ofnutritional_education:</label>
+            <select name="lack_ofnutritional_education" id="lack_ofnutritional_education">
+                <option value=""></option>
+                <option value="1">yes</option>
+                <option value="0">no</option>
+            </select>
+            <br>
+            <label for="digestive_issues">digestive_issues:</label>
+            <select name="digestive_issues" id="digestive_issues">
+                <option value=""></option>
+                <option value="1">yes</option>
+                <option value="0">no</option>
+            </select>
+            <br>
+            <label for="stress">stress:</label>
+            <select name="stress" id="stress">
+                <option value=""></option>
+                <option value="2">episodic stress</option>
+                <option value="1">acute stress</option>
+                <option value="0">chronic stress</option>
+            </select>
+            <br>
+            <label for="asthma">asthma:</label>
+            <select name="asthma" id="asthma">
+                <option value=""></option>
+                <option value="1">yes</option>
+                <option value="0">no</option>
+            </select>
+            <br>
+            <label for="poor_diet">Poor Diet:</label>
+            <select name="poor_diet" id="poor_diet">
+                <option value=""></option>
+                <option value="2">frequently</option>
+                <option value="1">sometimes</option>
+                <option value="0">never</option>
+            </select>
+            <br>
+            <label for="mobility_issues">mobility_issues:</label>
+            <select name="mobility_issues" id="mobility_issues">
+                <option value=""></option>
+                <option value="1">yes</option>
+                <option value="0">no</option>
+            </select>
+            <!-- Add more feature inputs for Children category as needed -->
+        {% endif %}
+        <br>
+        <button type="submit">Predict</button>
+        <input type="reset" value="Reset">
+        <button type="button" onclick="history.back()">Back</button>
+
+    </form>
+</body>
+</html>

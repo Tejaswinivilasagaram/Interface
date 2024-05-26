@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Obesity Prediction Result</title>
+    <style>
+    body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('static/image/bg3.jpeg');
+            background-repeat:no-repeat;
+            background-attachement:fixed;
+            background-size: cover;
+        }
+    .advice {
+            margin: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+<div class="advice">
+    <h1 style="color: red;">Obesity Prediction Result</h1>
+    {% if is_obese %}
+        <p>The prediction for the {{ age_category }} age category is: Obese</p>
+        <p> You might want to consult a healthcare professional for personalized advice.</p>
+        <h2 style="color:blue;">Precautions to be taken:</h2>
+        <ul>
+            <li>Follow a balanced diet.</li>
+            <li>Increase physical activity.</li>
+            <li>Consult a healthcare professional for personalized advice.</li>
+            <li>Take proper exercise and physical activities Regularly: Stick to your prescribed schedule.</li>
+            <li>Get Enough Sleep: Aim for 7-9 hours of quality sleep each night to avoid stress.</li>
+            <li>Manage Stress: Practice stress-reduction techniques like deep breathing or meditation.</li>
+            <li>Avoid Triggers: Identify and avoid personal triggers, like lack of sleep or stress.</li>
+
+        </ul>
+    {% else %}
+        <p>The prediction for the {{ age_category }} age category is: Not Obese</p>
+        <h3 style="color: green;">Congratulations, you are not Obesed</h3>
+        <p>Keep up the good work!</p>
+        <p>Remember to maintain a balanced diet and regular exercise.</p>
+    {% endif %}
+</div>
+</body>
+</html>
